@@ -17,6 +17,8 @@ class U_JAM_API AEnemyAIController :  public AAIController
 public:
     AEnemyAIController();
 
+    virtual ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const override;
+
 protected:
     // 컨트롤러가 폰에 빙의(Possess)될 때 호출됩니다.
     virtual void OnPossess(APawn* InPawn) override;

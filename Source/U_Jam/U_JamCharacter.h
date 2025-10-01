@@ -103,5 +103,8 @@ private:
 	// 4. 팀 ID를 저장할 변수 선언
 	UPROPERTY(EditAnywhere, Category = "AI")
 	FGenericTeamId TeamId;
+
+public :
+	virtual void BeginPlay() override;
 };
 

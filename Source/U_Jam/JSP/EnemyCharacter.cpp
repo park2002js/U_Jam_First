@@ -2,7 +2,7 @@
 
 
 #include "JSP/EnemyCharacter.h"
-
+#include "Logging/LogMacros.h" // 로깅을 위해
 #include "EnemyAIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -45,7 +45,8 @@ AEnemyCharacter::AEnemyCharacter()
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+    // 게임 시작 시 나의 팀 ID를 로그로 출력
+    UE_LOG(LogTemp, Warning, TEXT("Enemy Character Team ID is: %d"), TeamId.GetId());
 }
 
 // Called every frame

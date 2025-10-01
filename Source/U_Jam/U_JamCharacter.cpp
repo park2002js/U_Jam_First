@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "U_Jam.h"
+#include "Logging/LogMacros.h"  // 로그를 위해 추가
 
 AU_JamCharacter::AU_JamCharacter()
 {
@@ -132,4 +133,12 @@ void AU_JamCharacter::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();
+}
+
+void AU_JamCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// 게임 시작 시 나의 팀 ID를 로그로 출력
+	UE_LOG(LogTemp, Warning, TEXT("Player Character Team ID is: %d"), TeamId.GetId());
 }
