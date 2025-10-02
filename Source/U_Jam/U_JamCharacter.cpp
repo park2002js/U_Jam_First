@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "U_Jam.h"
+#include "Logging/LogMacros.h"  // 로그를 위해 추가
 
 AU_JamCharacter::AU_JamCharacter()
 {
@@ -48,6 +49,8 @@ AU_JamCharacter::AU_JamCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	TeamId = FGenericTeamId(0); // 플레이어는 0번 팀
 }
 
 void AU_JamCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -130,4 +133,12 @@ void AU_JamCharacter::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();
+}
+
+void AU_JamCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// 게임 시작 시 나의 팀 ID를 로그로 출력
+	UE_LOG(LogTemp, Warning, TEXT("Player Character Team ID is: %d"), TeamId.GetId());
 }
