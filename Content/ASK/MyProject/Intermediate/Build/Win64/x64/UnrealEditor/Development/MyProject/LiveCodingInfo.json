@@ -1,0 +1,11 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.MyProject.gen.cpp.obj": [
+			"ClickCountWidget.gen.cpp.obj",
+			"MyPawn.gen.cpp.obj",
+			"MyPlayerController.gen.cpp.obj",
+			"MyProject.init.gen.cpp.obj"
+		]
+	}
+}
