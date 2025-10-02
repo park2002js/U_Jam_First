@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "GenericTeamAgentInterface.h" // <-- 1. 헤더 추가
 #include "U_JamCharacter.generated.h"
 
 class USpringArmComponent;
@@ -19,7 +20,7 @@ DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
  *  Implements a controllable orbiting camera
  */
 UCLASS(abstract)
-class AU_JamCharacter : public ACharacter
+class AU_JamCharacter : public ACharacter, public IGenericTeamAgentInterface // <-- 2. 인터페이스 상속
 {
 	GENERATED_BODY()
 
@@ -53,6 +54,7 @@ public:
 
 	/** Constructor */
 	AU_JamCharacter();	
+
 
 protected:
 
@@ -92,5 +94,17 @@ public:
 
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+public:
+	// 3. 팀 ID를 설정하고 가져오는 함수 선언
+	virtual FGenericTeamId GetGenericTeamId() const override { return TeamId; }
+	virtual void SetGenericTeamId(const FGenericTeamId& InTeamId) { TeamId = InTeamId; }
+private:
+	// 4. 팀 ID를 저장할 변수 선언
+	UPROPERTY(EditAnywhere, Category = "AI")
+	FGenericTeamId TeamId;
+
+public :
+	virtual void BeginPlay() override;
 };
 
